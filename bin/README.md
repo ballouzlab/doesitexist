@@ -1,12 +1,9 @@
 # Analysis of XIST/Xist expression 
 ## Fractions of cells expressing _XIST_
 #### Tabula Sapiens
-Webpage: 
-- https://cellxgene.cziscience.com/collections/e5f58829-1a66-40b5-a624-9046778e74f5   
-Download: 
-- https://datasets.cellxgene.cziscience.com/5a495302-b7cd-4bf9-853e-95627b00bb03.h5ad
-Genes: 
-- XIST (ENSG00000229807), TSIX (ENSG00000270641), XACT (ENSG00000241743), JPX (ENSG00000225470), FTX (ENSG00000230590), RPS4Y1 (ENSG00000129824), RPS4X (ENSG00000198034), DDX3X (ENSG00000215301), DDX3Y (ENSG00000067048) 
+- Webpage: https://cellxgene.cziscience.com/collections/e5f58829-1a66-40b5-a624-9046778e74f5   
+- Download: https://datasets.cellxgene.cziscience.com/5a495302-b7cd-4bf9-853e-95627b00bb03.h5ad
+- Genes: XIST (ENSG00000229807), TSIX (ENSG00000270641), XACT (ENSG00000241743), JPX (ENSG00000225470), FTX (ENSG00000230590), RPS4Y1 (ENSG00000129824), RPS4X (ENSG00000198034), DDX3X (ENSG00000215301), DDX3Y (ENSG00000067048) 
 ```{python}
 import numpy as np
 import pandas as pd
@@ -67,16 +64,12 @@ beeswarm( expr_data[x1,9]/expr_data[x1,3] ~ as.factor(expr_data[x1,5]),
 
 ## Fractions of cells expressing _Xist_
 #### Tabula Muris
-Webpage: 
-- https://cellxgene.cziscience.com/collections/0b9d8a04-bb9d-44da-aa27-705bb65b54eb
-Download: 
-- https://datasets.cellxgene.cziscience.com/15533333-bbe6-4b87-8a91-f13d5924e8ab.h5ad
-Genes:
-- Xist (ENSMUSG00000086503), Tsix, (ENSMUSG00000085715), Jpx   (ENSMUSG00000097571), Ftx (ENSMUSG00000086370), Pps4x (ENSMUSG00000031320), Ddx3y (ENSMUSG00000069045), Ddx3x (ENSMUSG00000000787) 
+- Webpage: https://cellxgene.cziscience.com/collections/0b9d8a04-bb9d-44da-aa27-705bb65b54eb
+- Download: https://datasets.cellxgene.cziscience.com/15533333-bbe6-4b87-8a91-f13d5924e8ab.h5ad
+- Genes: Xist (ENSMUSG00000086503), Tsix, (ENSMUSG00000085715), Jpx   (ENSMUSG00000097571), Ftx (ENSMUSG00000086370), Pps4x (ENSMUSG00000031320), Ddx3y (ENSMUSG00000069045), Ddx3x (ENSMUSG00000000787) 
 ```{r}
 library(anndataR)
 library(Seurat)
-
 
 h5ad_file = "15533333-bbe6-4b87-8a91-f13d5924e8ab.h5ad"
 seurat_obj <- read_h5ad(h5ad_file, as = "Seurat")
