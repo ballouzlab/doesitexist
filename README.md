@@ -1,2 +1,2 @@
 # Does it eXIST? Evidence for stochastic expression of long non-coding RNA in single-cell data
- 
+XIST is a long non-coding RNA that plays a critical role in X-chromosome inactivation, a process that occurs in female mammals to ensure dosage compensation between males and females. XIST expression occurs exclusively from the inactivated X-chromosome. However, the current state-of-art single cell RNA sequencing transcriptomics sometimes does not detect XIST expression in “female” transcripts (i.e., from XX cells), while some expression is detected in male transcripts (i.e., from XY cells). We review the potential technical explanations, including lncRNA dynamics, and further explore potential biological variation that could underly this, including XCI erosion and cancer.  
