@@ -178,4 +178,16 @@ dev.off()
 - https://gtexportal.org/home/gene/RPS4X  (ENSG00000198034.11)
 - https://gtexportal.org/home/gene/RPS4Y1  (ENSG00000129824.16)
  
+## Differential expression: _XIST_
 
+## Co-expression/co-occurrence with _XIST_
+```{r}
+
+ff = sex == "female"
+fm = sex == "male"
+correlation_fem = cor(xist[ff], tsix[ff], method="spearman")
+correlation_mal = cor(xist[fm], tsix[fm], method="spearman")
+freq_co-occur = plyr::count( cbind(sex, (xist>0 *1), (tsix>0 *1) ))
+
+
+```
