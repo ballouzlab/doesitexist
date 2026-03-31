@@ -7,7 +7,47 @@ Download:
 - https://datasets.cellxgene.cziscience.com/5a495302-b7cd-4bf9-853e-95627b00bb03.h5ad
 Genes: 
 - XIST (ENSG00000229807), TSIX (ENSG00000270641), XACT (ENSG00000241743), JPX (ENSG00000225470), FTX (ENSG00000230590), RPS4Y1 (ENSG00000129824), RPS4X (ENSG00000198034), DDX3X (ENSG00000215301), DDX3Y (ENSG00000067048) 
-```{}
+```{python}
+import numpy as np
+import pandas as pd
+import anndata as ad
+import scanpy as sc
+
+adata = sc.read_h5ad('5a495302-b7cd-4bf9-853e-95627b00bb03.h5ad')   # tabula sapiens 
+sex = adata.obs['sex']
+tissue = adata.obs['tissue']
+cell_type = adata.obs['cell_type']
+assay = adata.obs['assay']
+dev = adata.obs['development_stage']
+sub_temp =  adata[:, [  
+"ENSG00000229807",
+"ENSG00000270641",
+"ENSG00000126012",
+"ENSG00000147050",
+"ENSG00000225470",
+"ENSG00000005889",
+"ENSG00000173674",
+"ENSG00000198034",
+"ENSG00000072501",
+"ENSG00000183943",
+"ENSG00000169249",
+"ENSG00000086712",
+"ENSG00000006757",
+"ENSG00000215301",
+"ENSG00000230590",
+"ENSG00000129824",
+"ENSG00000215301",
+"ENSG00000067048",
+"ENSG00000285756",
+"ENSG00000130021",
+"ENSG00000241743"]  ]
+
+temp = sub_temp.X.toarray()
+df2 = pd.DataFrame(temp)
+df2.to_csv('tabexprs.csv')
+
+df = pd.DataFrame({'sex':sex, 'assay':assay, 'cell_type':cell_type, 'tissue':tissue, 'dev':dev})
+df.to_csv('meta.csv')
 
 ```
 #### CellXGene: _Homo sapiens_ 
