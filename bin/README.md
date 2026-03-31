@@ -13,7 +13,13 @@ Genes:
 #### CellXGene: _Homo sapiens_ 
 - https://cellxgene.cziscience.com/gene-expression
 - Human genes: XIST, XACT, DDX3X, DDX3Y, TSIX, EIF1AX, EIF1AY, EZH2, EED, FTX, JPX, KDM5C, KDM6A, PCGF3, RPS4X, RPS4Y1, RPS4Y2, USP9X, USP9Y, SUZ12, SPEN, PCGF5, RLIM, RNF2
-```{}
+```{r}
+library(beeswarm)
+expr_data <- read.table("CELLxGENE_gene_expression_human_XIST.csv")
+g1 = "XIST"; 
+x1 = expr_data[,6] == g1 & expr_data[,5] != "aggregated"; 
+beeswarm( expr_data[x1,9]/expr_data[x1,3] ~ as.factor(expr_data[x1,5]), 
+          pch=19, xlab="Sex", ylab="Fraction of cells expressing", main=g1, corral="wrap", cex=0.5)
 
 ```
 
