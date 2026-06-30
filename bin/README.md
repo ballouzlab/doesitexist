@@ -105,7 +105,8 @@ celltypes_pal = data.frame(celltype=celltypes, col=turbo(151))
 tissues_pal = data.frame(tissue=tissues, col=turbo(23)) 
  
 fx = all_freq_table[,5] == "TRUE"
-# Note, this is Panel C of figure 4
+
+# Note, this is Panel A of figure 2
 pdf("human_tab_frac_xist.pdf")
 beeswarm(all_freq_table[fx,8] ~   all_freq_table[fx,4] + all_freq_table[fx,1], corral="gutter" , pwcol = assays_pal [as.factor(all_freq_table[fx,2]),2], pch=19, ylab="Fraction of cells expressing XIST", xlab="")
 vioplot(all_freq_table[fx,8] ~   all_freq_table[fx,2] + all_freq_table[fx,1], col = (array(assays_pal[,2])),ylab="", xlab="")
@@ -123,6 +124,29 @@ for(i in 1:length(assays)){
     }
   }
 }
+
+
+# Note, these are panels A and B for figure 1
+n = length(levels(tissue))
+filt = filtf; xist_filtf = lapply(levels(tissue), function(i) xist[filt][which(tissue[filt]==i )]  )
+xist_filtf[which(sapply(1:n, function(i) length(xist_filtf[[i]]) )== 0 )] = 0  
+names(xist_filtf) = levels(tissue)
+filt = filtm; xist_filtm = lapply(levels(tissue), function(i) xist[filt][which(tissue[filt]==i )]  )
+xist_filtm[which(sapply(1:n, function(i) length(xist_filtm[[i]]) )== 0 )] = 0  
+names(xist_filtm) = levels(tissue)
+
+pdf("expressiond_xist_tab_sap.pdf", width=20, height=10)
+vioplot(xist_filtf, vertical = T, pch=19, 
+           col=turbo(n), cex=0.5, axes=F, 
+           ylab="Xist expression", xlab="Tissue", ylim=c(0,5))
+vioplot( xist_filtm, vertical = T, pch=19, 
+           col=turbo(n), cex=0.5, axes=F,   
+           ylab="Xist expression", xlab="Tissue", ylim=c(0,5))
+text(1:n, -1, levels(tissue), srt=90, adj=1, xpd=NA)
+dev.off() 
+ 
+pdf("human_legend_exp.pdf"); plot(0,0); legend("top", leg=levels(tissue), col = turbo(n), pch=15); dev.off() 
+
 
 ```
 #### CellXGene: _Homo sapiens_ 
@@ -162,7 +186,7 @@ for( cii in ci ){
 n = length(unique(tissue))
 tissues_pal = data.frame(tiss=as.factor(unique(tissue[])), col=magma(n))
 
-# Note, this is Panel D of figure 4
+# Note, this is Panel C of figure 2
 i = 1
 pdf("human_cellxgene.pdf", width=10, height=8)
 beeswarm(  expr_data[filt1,ci][,i] ~ tissue[filt1]+sex[filt1], 
@@ -272,7 +296,7 @@ celltypes_pal = data.frame(celltype=celltypes, col=turbo(151))
 tissues_pal = data.frame(tissue=tissues, col=turbo(23)) 
  
 fx = all_freq_table[,5] == "TRUE"
-# Note, this is Panel A of figure 4
+# Note, this is Panel B of figure 2
 pdf("mouse_tab_frac_xist.pdf")
 beeswarm(all_freq_table[fx,8] ~   all_freq_table[fx,4] + all_freq_table[fx,1], corral="gutter" , pwcol = assays_pal [as.factor(all_freq_table[fx,2]),2], pch=19, ylab="Fraction of cells expressing Xist", xlab="")
 vioplot(all_freq_table[fx,8] ~   all_freq_table[fx,2] + all_freq_table[fx,1], col = (array(assays_pal[,2])),ylab="", xlab="")
@@ -290,6 +314,28 @@ for(i in 1:length(assays)){
     }
   }
 }
+
+
+# Note, this is Supplementary figure 3
+n = length(levels(tissue))
+filt = filtf; xist_filtf = lapply(levels(tissue), function(i) xist[filt][which(tissue[filt]==i )]  )
+xist_filtf[which(sapply(1:n, function(i) length(xist_filtf[[i]]) )== 0 )] = 0  
+names(xist_filtf) = levels(tissue)
+filt = filtm; xist_filtm = lapply(levels(tissue), function(i) xist[filt][which(tissue[filt]==i )]  )
+xist_filtm[which(sapply(1:n, function(i) length(xist_filtm[[i]]) )== 0 )] = 0  
+names(xist_filtm) = levels(tissue)
+
+pdf("mouse_expressiond_xist_tab_sap.pdf", width=20, height=10)
+vioplot(xist_filtf, vertical = T, pch=19, 
+           col=turbo(n), cex=0.5, axes=F, 
+           ylab="Xist expression", xlab="Tissue", ylim=c(0,6))
+vioplot( xist_filtm, vertical = T, pch=19, 
+           col=turbo(n), cex=0.5, axes=F,   
+           ylab="Xist expression", xlab="Tissue", ylim=c(0,6))
+text(1:n, -1, levels(tissue), srt=90, adj=1, xpd=NA)
+dev.off() 
+ 
+pdf("mouse_legend_exp.pdf"); plot(0,0); legend("top", leg=levels(tissue), col = turbo(n), pch=15); dev.off() 
 
 
 ```
@@ -325,7 +371,7 @@ for( cii in ci ){
   expr_data[,cii] =  as.numeric(gsub("%", "", expr_data[,cii]))
 }
 
-# Note, this is Panel B of figure 4
+# Note, this is Panel D of figure 2
 i=1
 pdf("mouse_cellxgene.pdf", width=10, height=8)
 beeswarm( as.numeric(gsub("%", "", expr_data[filt1,ci][,i]))~ tissue[filt1]+sex[filt1], 
@@ -334,6 +380,8 @@ beeswarm( as.numeric(gsub("%", "", expr_data[filt1,ci][,i]))~ tissue[filt1]+sex[
           ylab="Fraction of cells expressing Xist", corral="gutter")
 axis(2)
 dev.off() 
+
+
 
 ```
 ## GTEx - bulk expression
